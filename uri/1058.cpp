@@ -1,6 +1,6 @@
 /**
-	Uri 1058
-	accepted - 21/08/2016. Time 0.08ms
+	Problema: Uri 1058
+	accepted - 21/08/2016. Time 0.008ms
 	Solução: 
 		Programacao dinamica. A ideia central e fixar um triangulo, e apos isso chamar uma recursao para os grupos restantes (esquerda, centro, direita).
 		a pd guarda os valores de esquerda e direita da chamada atual e as chamadas sao feitas ate que esquerda ultrapasse direita.  

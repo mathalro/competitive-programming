@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+#define maxn 26
+#define inf 0x3f3f3f3f
+
+using namespace std;
+
+int grafo[maxn][maxn];
+int visitado[maxn];
+int pais[maxn];
+
+int n;
+
+int bfs(int origem, int destino) {
+	int gargalo = inf, u;
+
+	memset(visitado, 0, sizeof visitado);
+	memset(pais, 0, sizeof pais);
+
+	visitado[origem] = 1;
+	queue<int> q;
+	q.push(origem);
+
+	while(!q.empty()) {
+		u = q.front(); q.pop();
+		for (int i = 0; i < 26; i++) {
+			if (grafo[u][i] && !visitado[i]) {
+				pais[i] = u;
+				visitado[i] = 1;
+				q.push(i);
+				gargalo = min(gargalo, grafo[u][i]);
+				if (i == destino) {
+					goto label;
+				}
+			}
+		}
+	}
+	
+
+	label: cout << gargalo << endl;
+	while (u) {
+		grafo[u][pais[u]] += gargalo;
+		grafo[pais[u]][u] -= gargalo;		
+		u = pais[u];
+	}
+	
+	if (gargalo == inf) return 0; 
+	else return gargalo;
+}
+
+int fluxo(int origem, int destino) {
+	int fluxo;
+	while(1) {
+		int gargalo = bfs(origem, destino);
+		if (gargalo == 0)
+			return fluxo;
+		fluxo += gargalo;
+	}
+
+	return fluxo;
+}
+
+int main(){
+	scanf("%d", &n);
+	for(int i=0;i<n;++i){
+		char v0, v1;
+		int w;
+		scanf(" %c %c %d", &v0, &v1, &w);
+		v0 -= 'A';
+		v1 -= 'A';
+		grafo[v0][v1] = w;
+
+		printf("%d\n", fluxo(0, 25));
+	}
+}

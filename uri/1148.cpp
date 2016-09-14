@@ -1,6 +1,6 @@
 /**
 	Problema: Uri 1148
-	accepted - 21/08/2016. Time 0.165ms
+	accepted - 13/08/2016. Time 0.165ms
 	Solução: 
 		Aplicação direta de djkstra, desconsiderando as duplas de vértices que são conexos.  
 **/

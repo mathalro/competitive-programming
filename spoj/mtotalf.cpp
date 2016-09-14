@@ -1,5 +1,5 @@
 """
-	spoj 
+	problema: spoj MTOTALF
 	accept 09/09/2016
 	time: 0.0
 	memoria: 3.4M

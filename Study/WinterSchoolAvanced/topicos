@@ -1,0 +1,33 @@
+Dia 1
+	Estruturas Persistentes
+	Sqrt decomposition
+	Centroid Decomposition
+
+Dia 2
+	Linearização de arvore
+	Pulo LCA
+	Sparse table
+	Flow - Dinic
+	Line sweep
+
+Dia 3
+	Linha de paretos
+	Rolling hash
+	Suffix Array - Suffix Tree
+	LCP - prefix
+	Segtree de Bitmask
+
+dia 4
+	MST com SQRT
+	PD em arvore
+	PD otimicação	
+		Divide and conquer optimization
+		Meet in The middle
+		PD l-r com for no meio 
+		Convex hole trick 1
+		Convex hole trick 2
+		Otimização de Knuth
+
+dia 5
+	Dinamic connectivit
+	Link Cut Tree

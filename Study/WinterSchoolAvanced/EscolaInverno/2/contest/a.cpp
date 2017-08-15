@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+#define maxn 1000
+
+using namespace std;
+
+struct edge {
+	int u, v, c;
+	edge() {}
+	edge(_u, _v, _c) : u(_u), v(_v), c(_c) {}
+};
+
+vector<edge> ed;
+vector<int> g[maxn]
+int pais[maxn];
+
+
+void addEdge(int _u, int _v, int _c, int _w) {
+	g[u].push_back(edge.size());
+	ed.push_back(edge(u, v, c, w));
+	g[v].push_back(edge.size());
+	ed.push_back(edge(v, u, 0));
+}
+
+
+int bfs(int s, int t) {
+	memset(pais, -1, sizeof pais);
+	queue<int> q;
+	
+	
+	
+}
+
+
+
+int main () {
+
+	return 0;
+}

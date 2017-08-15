@@ -1,0 +1,35 @@
+Upsolving
+	Raio
+		LCA
+		Heavy Light
+	Batata Quente
+		Persistent
+		Moo Algorithm
+	Cairo
+		Segtree de arvore binaria
+	
+
+Linha de paretos
+
+
+Otimizacao de PD
+	Divide and conquer optimization
+
+
+Rolling hash
+	
+	Having Carp
+	Suffix Array - Suffix Tree
+		Quantas substrings diferentes
+
+	LCP - prefix
+
+	Achar primeira letra que difere - busca binaria
+
+Segtree de Bitmask
+
+
+Problema do anagrama - Mineira
+
+	Preprocessar e falar quais indices tem um anagrama
+	Varrer todos os j e para cada j encontrar os is com busca binaria

@@ -1,0 +1,20 @@
+Linearização de arvore
+
+
+Pulo LCA
+
+
+Sparse table
+
+
+Flow
+	Dinic
+	BFS -> enquanto DFS
+
+
+Line sweep
+	https://www.urionlinejudge.com.br/repository/UOJ_1468.html
+
+
+__builtin_ctz()
+

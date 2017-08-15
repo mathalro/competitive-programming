@@ -1,61 +1,72 @@
 #include <bits/stdc++.h>
-#define maxn 1000009
+#define maxn 2000050
 
 using namespace std;
 
-int tr[maxn][26];
+int tr[maxn][30];
 
 int sz = 1;
 
-int pesquisa(string s) {
-	int node = 0;
-	int cont = 1;
+int search(string s) {
+	int cont = 0, node = 0, c;
 	for (int i = 0; i < s.size(); i++) {
 		int tmp = 0;
-		for (int j = 0; j < 26; j++) {
-			if (tr[node][j] != -1) {
-				tmp++;
+		if (s[i] != '#') {
+			for (int j = 0; j < 27; j++) {
+				if (tr[node][j] != -1) {
+					tmp++;
+				}
 			}
 		}
-		if (tmp > 1) {
+		if (tmp > 1 || (tmp == 1 && node == 0)) {
 			cont++;	
 		}
-		node = tr[node][s[i]];
+		if (s[i] == '#') c = 26;
+		else c = s[i]-'a';		
+		node = tr[node][c];
 	}
 
 	return cont;
 }
 
-void inserir(string s) {
+void insert(string s) {
 	int node = 0;
 	for (int i = 0; i < s.size(); i++) {
-		if (tr[node][s[i]] == -1) {
-			tr[node][s[i]] = sz++;
+		int c;
+		if (s[i] == '#') c = 26;
+		else c = s[i]-'a';
+		if (tr[node][c] == -1) {
+			tr[node][c] = sz;
+			memset(tr[sz], -1, sizeof tr[sz]);
+			sz++;
 		}
-		node = tr[node][s[i]];
+		node = tr[node][c];
 	}
 }
 
 int main () {
 	
 	int n; 
-
-	while (scanf("%d", &n)) {	
-		set<string> D;
-		memset(tr, -1, sizeof tr);
+	vector<string> D;
+		
+	while (scanf("%d", &n) != EOF) {	
+		sz = 1;
+		memset(tr[0], -1, sizeof tr[0]);
 		for (int i = 0; i < n; i++) {
 			string s; cin >> s;
-			D.insert(s);
+			s += "#";
+			D.push_back(s);
 			insert(s);
 		}
 
 		int sum = 0;
-		for (string it : D) {
-			sum += pesquisa(it);
+		for (int i = 0; i < D.size(); i++) {
+			int aux = search(D[i]);
+			sum += aux;
 		}
-
-		printf("%lf\n", sum/D.size());
 		
+		printf("%.2lf\n", sum/(double)n);
+		D.clear();
 	}
 
 	return 0;

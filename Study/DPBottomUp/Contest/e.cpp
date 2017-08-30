@@ -35,14 +35,9 @@ int main () {
 				}
 			}
 			for (int j = -k; j <= k; j++) {
-				//if (dp[1][j+k] < -100) {
-					//printf("oo ");
-				//} else {
-					//printf("%2d ", dp[1][j+k]);
-				//}
 				dp[0][j+k] = dp[1][j+k];	
-			}//puts("");
-		}//puts("");
+			}
+		}
 
 		printf("%d\n", dp[0][k]/2);
 	}

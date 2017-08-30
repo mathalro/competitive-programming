@@ -13,7 +13,7 @@ void updateY(int nox, int lx, int rx, int noy, int ly, int ry, int x, int y, int
 			st[nox][noy] += val;
 		} else {
 			st[nox][noy] = st[2*nox][noy] + st[2*nox+1][noy];
-			cout << "Up: " << st[nox][noy] << ' ' << nox << ' ' << noy << endl;
+			cout << st[nox][noy] << ' ' << nox << ' ' << noy << endl;
 		}
 	} else {
 		int mid = (ly+ry)/2;

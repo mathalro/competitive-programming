@@ -1,19 +1,25 @@
 #include <bits/stdc++.h>
-#define maxn 1009
+#define maxn 1001
 
 using namespace std;
 
 int X, Y, p;
 int st[4*maxn][4*maxn];
 
+void build() {
+	for (int i = 0; i <= 4*X; i++) {
+		for (int j = 0; j <= 4*Y; j++) {
+			st[i][j] = 0;
+		}
+	}
+}
+
 void updateY(int nox, int lx, int rx, int noy, int ly, int ry, int x, int y, int val) {
 	if (ly == ry) {
 		if (lx == rx) {
-			cout << val << endl;
 			st[nox][noy] += val;
 		} else {
 			st[nox][noy] = st[2*nox][noy] + st[2*nox+1][noy];
-			cout << "Up: " << st[nox][noy] << ' ' << nox << ' ' << noy << endl;
 		}
 	} else {
 		int mid = (ly+ry)/2;
@@ -40,7 +46,6 @@ void updateX(int no, int lx, int rx, int x, int y, int val) {
 int queryY(int nox, int noy, int ly, int ry, int lyq, int ryq) {
 	if (ly > ryq || ry < lyq) return 0;
 	if (ly >= lyq && ry <= ryq) {
-		cout << "Query: " << nox << ' ' << noy << endl;
 		return st[nox][noy];
 	}
 	int mid = (ly+ry)/2;
@@ -69,16 +74,18 @@ int main () {
 			char c; scanf(" %c", &c);
 			if (c == 'A') {
 				int n, a, b; scanf("%d %d %d", &n, &a, &b);
+			  a++; b++; 
 				updateX(1, 1, X, a, b, n);
 			} else {
 				int x1, y1, x2, y2; scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
 				x1++; y1++; x2++; y2++;
 				if (x1 > x2) swap(x1, x2);
 				if (y1 > y2) swap(y1, y2);
-				printf("%d %d %d %d\n", x1, y1, x2, y2);
 				printf("%d\n", queryX(1, 1, X, x1, x2, y1, y2)*p);
 			}
  		}
+		puts("");
+		build();
 	}
 
 	

@@ -1,9 +1,9 @@
 /*
  ================================
-|	uri 1205 - accept          		 |  
-| theme: ordenacao personalizada |
+| uri 1205 - accept              |  
+| theme: caminho minimo          |
 | complexity: O(ElogV)           |
-| time: 0.244s									 |	
+| time: 0.244s                   |	
  ================================
 */
 

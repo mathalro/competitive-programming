@@ -1,7 +1,7 @@
 /*
  ================================
 | uri 1205 - accept              |  
-| theme: ordenacao personalizada |
+| theme: caminho minimo          |
 | complexity: O(ElogV)           |
 | time: 0.244s                   |	
  ================================

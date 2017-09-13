@@ -1,0 +1,4 @@
+1396.cpp: In function ‘int main()’:
+1396.cpp:57:29: error: expected primary-expression before ‘case’
+   cout << "Instancia " << ++case << endl;
+                             ^

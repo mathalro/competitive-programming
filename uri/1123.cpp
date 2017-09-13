@@ -28,7 +28,7 @@ int djkstra(int origem) {
 	while(!q.empty()) {
 		node topo = q.top(); q.pop(); 
 		int u = topo.vertice;
-		
+		if (u == c-1) return distancia[u];		
 		for (int i = 0; i < n; i++) {
 			if (grafo[u][i] != -1) {
 				if (u < c) {

@@ -3,38 +3,36 @@
 
 using namespace std;
 
-struct M {
-	int m[maxn][maxn];
-};
+int n;
+vector<int> g[maxn];
+set< vector< multiset<int> > > S;
 
-struct cmp {
-	bool operator()(M a, M b) {
-		for (int i = 0; i < maxn; i++) {
-			for (int j = 0; j < maxn; j++) {
-				if (a.m[i][j] != b.m[i][j]) {
-					return false;
-				}  
+vector< multiset<int> > bfs(int pai) {
+	vector< multiset<int> > niveis(maxn);
+	int visitado[maxn], nivel[maxn];
+	memset(visitado, 0, sizeof visitado);
+	memset(nivel, 0, sizeof nivel);
+	queue<int> q;
+	q.push(pai);
+	visitado[pai] = 1;
+	while (!q.empty()) {
+		int u = q.front(); q.pop();
+		int cont = 0;
+		for (int i = 0; i < g[u].size(); i++) {
+			int v = g[u][i];
+			if (!visitado[v]) {
+				cont++;
+				visitado[v] = 1;
+				nivel[v] = nivel[u]+1;
+				q.push(v);
 			}
 		}
-		return true;
-	}
-};
-
-int visitado[maxn], n;
-vector<int> g[maxn];
-int dp[maxn][maxn];
-set<M, cmp> S;
-
-void dfs(int pai, int nivel, int indice) {
-	visitado[pai] = 1;
-	int cont = 0;
-	for (int i = 0; i < g[pai].size(); i++) {
-		if (!visitado[g[pai][i]]) {
-			dfs(g[pai][i], nivel+1, cont++);
+		if (cont) {
+			niveis[nivel[u]].insert(cont);
 		}
 	}
-	
-	dp[nivel][indice] = cont;
+
+	return niveis;
 }
 
 int main () {
@@ -48,19 +46,7 @@ int main () {
 			g[a].push_back(i);
 		}
 
-		memset(visitado, 0, sizeof visitado);
-		memset(dp, 0, sizeof dp);
-		dfs(1, 0, 0);
-
-		M novo;
-		for (int i = 0; i < maxn; i++) {
-			for (int j = 0; j < maxn; j++) {
-				novo.m[i][j] = dp[i][j];
-				cout << novo.m[i][j] << ' ';
-			}cout << endl;
-		}cout << endl;
-
-		S.insert(novo);
+		S.insert(bfs(1));
 
 		for (int i = 0; i < maxn; i++) {
 			g[i].clear();

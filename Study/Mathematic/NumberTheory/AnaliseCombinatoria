@@ -1,0 +1,16 @@
+Arranjo Simples: 
+
+  Formas de escolher p elementos de um conjuto com n elementos, de modo que esses elementos não se repitam, sendo que a ordem desses elementos importa, ou seja, ABC diferente de BCA. E calculado como n!/(n-p)!. Ou seja, e a quantidade de maneiras de escolher n elementos do conjunto dividido pela quantidade de maneiras de considerar os elementos fora do conjunto p.
+
+Permutação Simples: 
+
+  Formas de escolher n elementos de um conjunto com n elementos, de modo que esses elementos não se repitam, sendo que a ordem em que esses elementos se encontra é importante. E calculada como n!, ou seja, n possibilidades para a primeira posicao, n-1 para a segunda pois um ja foi escolhido e assim sucessivamente. É um caso especifico de arranjo simples, onde p = n.
+
+Permutacao com repeticao
+
+	Nessa permutacao, existem elementos repetidos compondo o conjunto de n elementos. Ou seja, devemos considerar a quantidade de vezes que cada elemento aparece na hora do calculo, para eliminar as possibilidades identicas. E calculada como n!/(n1!*n2!*...*nk!), em que n1,n2,...,nk sao as quantidades de vezes que um elemento que se repete aparece. 
+
+Combinacao Simples:
+
+	Formas de escolher p elementos de um conjunto de n elementos, de modo que esses elementos nao se repitam e a ordem nao importa, ou seja, ABC = CBA. E calculado como  n!/(p!(n-p)!). Ou seja, e o arranjo de p elementos dado n elementos, dividido pela quantidade de maneiras distintas que esses elementos podem se econtrar. 
+

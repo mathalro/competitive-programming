@@ -1,61 +1,44 @@
-/**
-	Problema: Uri 1135
-	accepted - 14/09/2016. Time 0.528ms
-	Solução: 
-			Podemos modelar a colonia como uma arvore e usar o LCA para encontrar o menor caminho.  
-**/
 #include <bits/stdc++.h>
-#define maxn 100000
+#define maxn 100009
 
 using namespace std;
 
-int peso[maxn], distancia[maxn], pais[maxn], n;
+int pai[maxn], peso[maxn], nivel[maxn];
 
-long long int lca(int u, int v) {
-	long long int total = 0;
-	if(distancia[u] < distancia[v])
-        swap(u, v);
+long long lca(int a, int b) {
+	long long cont = 0;
+	if (nivel[a] < nivel[b]) swap(a, b);
 
-    while(distancia[u] != distancia[v]) {
-    	total += peso[u];
-    	u = pais[u];
-    }
+	while (nivel[a] != nivel[b]) {
+		cont += peso[a];
+		a = pai[a];
+	}	
 
-    while(u != v) {
-    	total += peso[u];
-        total += peso[v];
-        u = pais[u];
-        v = pais[v];
-    }
+	while (a != b) {
+		cont += peso[a] + peso[b];
+		a = pai[a]; b = pai[b];
+	}
 
-    return total;
+	return cont;
 }
 
 int main () {
-	int casos;
-	while (scanf("%d", &n)) {
-		if (n == 0) break;
-		for (int i = 0; i < n; i++) {
-			distancia[i] = 0;
-		}
-		for (int i = 1; i <	 n; i++) {
-			int x, y;
-			scanf("%d %d", &x, &y);
-			pais[i] = x;
-			peso[i] = y;
-			distancia[i] = distancia[pais[i]] + 1;
+	int n; 
+	while (scanf("%d", &n) && n) {
+		nivel[0] = 0;
+		for (int i = 1; i < n; i++) {
+			int a, l; scanf("%d %d", &a, &l);
+			pai[i] = a;
+			peso[i] = l;
+			nivel[i] = nivel[a]+1;
 		}
 
-		scanf("%d", &casos);
-		while (casos--) {
-			int x, y;
-			scanf("%d %d", &x, &y);
-			if (casos == 0)
-				printf("%lld\n", lca(x, y));
-			else
-				printf("%lld ", lca(x, y));
-		}
+		int q; scanf("%d", &q);
+
+		for (int i = 0; i < q; i++) {
+			int a, b; scanf("%d %d", &a, &b);
+			printf("%lld", lca(a, b));
+			if (i < q-1) printf(" ");
+		}puts("");
 	}
-
-	return 0;
 }

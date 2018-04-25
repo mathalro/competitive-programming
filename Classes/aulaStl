@@ -1,0 +1,127 @@
+String
+
+	Motivacao: Facilitar a manipulação de um array de caracteres
+	
+	Inicializacao e acesso
+		* assign / operador =
+		* operador []
+
+	Capacidade
+		* size / length
+		* clear
+	
+	Modificadores
+		* replace
+		* tolower, # vulgo s[i] < 'a' ? s[i] + 32 : s[i];
+		* isalpha, # vulgo ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')) : true : false;
+
+	Operadores
+		* c_str
+		* find
+		* npos
+		* substr
+
+Vector
+
+	Motivação: São containers de sequência que representam arrays dinamicos
+											|
+								 (armazena uma colecao de elementos)
+
+	Inicializacao e acesso
+		* assign / operador =
+				vector<int> v(5, 10);
+		* operador []
+				cout << v[i] << endl;
+	
+	Capacidade
+		* size 
+				for (int i = 0; i < v.size(); i++) cout << v[i] << ' ';
+		* empty
+				while (!v.empty()) v.pop_back();
+
+	Iteradores
+		Objeto capaz de iterar pelos elementos de um container utilizando o operador ++ e o dereferenciamento *
+		vector<int>::iterator it;
+		* begin
+		* end
+			for (it = v.begin(); it != v.end(); it++) cout << *it << endl;
+
+	Modificadores
+		* push_back
+			for (int i = 0; i < n; i++) {
+				int a; cin >> a;
+				v.push_back(a);
+			}
+		* insert			
+				(posAfter(), qtd, elem);
+				(posAfter(), w.begin(), w.end())  
+			for (int i = 0; i < n; i++) {
+				int a; cin >> a;
+				v.insert(v.begin(), a);
+			}			
+		* erase				
+				v.erase(v.begin(), v.end());	
+		* resize
+				v.resize(n);
+		* clear	
+				v.clear()
+
+	Ordenacao
+		* sort
+			introsort
+			sort(v.begin(), v.end());
+		* greater
+			greater<int>()
+
+	Structs
+		* vector<struct> v;
+		struct ponto {
+			int x, int y;
+			ponto() {}
+			ponto(int _x, int _y) : x(_x), y(_y) {}
+			bool operator < (ponto rhs) const {
+				if (x == rhs.x)	return y <= rhs.y;
+				return x < rhs.x;
+			}
+			bool friend operator < (ponto lhs, ponto rhs) {
+				if (lhs.x == rhs.x)	return lsh.y <= rhs.y;
+				return lhs.x < rhs.x;
+			}
+		}
+
+		bool friend operator < (ponto lhs, ponto rhs) {
+			if (lhs.x == rhs.x)	return lsh.y <= rhs.y;
+			return lhs.x < rhs.x;
+		}
+	
+		bool cmp (ponto lhs, ponto rhs) {
+			if (lhs.x == rhs.x)	return lsh.y <= rhs.y;
+			return lhs.x < rhs.x;
+		}
+
+Map
+
+Motivacao: Permitir o mapeamento de um valor (Key) em outro valor (Mapped)
+
+	Operador de acesso e assign []
+
+	Tamanho: size
+
+	Inserir chave e valor: insert - {key, value}
+
+	apagar: erase  - (position, key)
+
+	Limpar mapa: clear
+
+	Iterator para o comeco: begin
+
+	Iterador para o final: end
+
+	Percorrer um mapa: (map<int,int>::iterator it=m.begin(), it != m.end(); it++) {}
+
+	Verificar existencia de uma chave: find
+
+	Sobrecarga do operador menor [<]
+
+	Mapa de qualquer coisa: map<struct, struct>
+		

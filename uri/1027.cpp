@@ -1,37 +1,26 @@
-/*
- ============================================================================
- Name        : URI: 1027 - Onda Cŕitica
- Author      : Matheus de Almeida Rosa (Tchola)
- Version     : 1
- Copyright   : 
- Description : Programação Dinâmica
- ============================================================================
-*/
-
 #include <bits/stdc++.h>
+#define maxn 1001
 
 using namespace std;
 
-struct ponto {
-	int x;
-	int y;
-	bool operator < (const ponto &p) const {
-		return x < p.x;
+struct coordenada {
+	int x, y;
+	bool operator < (coordenada outro) const {
+		return x < outro.x;
 	}
 };
 
-int n, a;
+coordenada ponto[maxn];
 
-vector<ponto> pontos;
+int h1, h2, n;
 
-int f(int p, int pos) {
-
+int f(int x, int pos) {
 	int maior = 0;
 
-	for (int j = p+1; j < n; j++) {
-		if ( pontos[p].x < pontos[j].x ) {
-			if ( pos and pontos[j].y == a-1 or pontos[j].y == a+1 and !pos ) {
-				maior = max(maior, 1 + f(j, !pos));
+	for (register int i = x+1; i < n; i++) {
+		if (ponto[x].x < ponto[i].x) {
+			if (pos && ponto[i].y == h2 || !pos && ponto[i].y == h1) {
+				maior = max(maior, 1+f(i, !pos));
 			}
 		}
 	}
@@ -40,33 +29,30 @@ int f(int p, int pos) {
 }
 
 int main () {
-	
-	while(cin >> n) {
 
-		int maior = 0;
+	ios_base::sync_with_stdio(0); cin.tie(0);
 
-		for (int i = 0; i < n; i++) {
-			ponto p;
-			scanf("%d %d", &p.x, &p.y);
-			pontos.push_back(p);
+	while (cin >> n) {
+
+		for (register int i = 0; i < n; i++) {
+			cin >> ponto[i].x >> ponto[i].y;
 		}
 
-		sort(pontos.begin(), pontos.end());
+		sort(ponto, ponto+n);
 
+		int maior = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = i+1; j < n; j++) {
-				if ( pontos[i].x < pontos[j].x and abs(pontos[i].y - pontos[j].y) == 2 ) {
-					int h1 = max(pontos[i].y, pontos[j].y);
-					int h2 = min(pontos[i].y, pontos[j].y);
-					a = h2 + 1;
-					maior = max(maior, 1 + f(j, pontos[j].y==h1));
+				if (ponto[i].x < ponto[j].x && abs(ponto[i].y-ponto[j].y) == 2) {
+					h1 = max(ponto[i].y, ponto[j].y);
+					h2 = min(ponto[i].y, ponto[j].y);
+
+					maior = max(maior, 1+f(j, ponto[j].y == h1));
 				}
 			}
 		}
 
-		printf("%d\n", maior+1);
-
-		pontos.clear();
+		cout << 1+maior << "\n";
 	}
 
 	return 0;

@@ -1,0 +1,57 @@
+String:
+	assign
+		s.assign("nova string");
+
+	operator []
+
+	size / length
+		for (int i = 0; i < s.size(); i++) {}
+
+	c_str
+		printf("%s\n", s.c_str()); int a = atoi(s.c_str());
+
+	find
+		size_t found = s.find("padrao");
+	
+	getline()
+		"Lendo strings com espacos"
+
+
+Vector:
+
+	assign
+		v.assingn(1, 10); vector<int> v(1, 10);
+
+	push_back / insert
+
+	size
+		for (int i = 0; i < v.size(); i++) {}
+	
+	erase
+	
+	clear
+
+	front vs begin
+
+	sort
+
+	find
+		e agora?
+
+	vector de qualquer coisa ou, vector<struct>
+
+map
+	insert / operator[]
+
+	end
+
+	find
+	
+	size
+	
+	clear
+
+	mapa de qualquer coisa ou, map<struct, struct>
+
+		
+	

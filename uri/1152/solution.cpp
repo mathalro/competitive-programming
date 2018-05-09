@@ -8,20 +8,26 @@ struct edge {
 };
 
 int pai[maxn];
+int r[maxn];
 
 bool operator<(edge a, edge b) {
 	return a.v <= b.v;
 }
 
 int find(int a) {
-	if (a == pai[a]) return a;
-	return pai[a] = find(pai[a]);
+	return a == pai[a] ? a : (pai[a] = find(pai[a]));
 }
 
 void unionSet(int a, int b) {
 	int paiA = find(a);
 	int paiB = find(b);
-	pai[paiA] = pai[paiB];
+
+	if (r[paiA] > r[paiB]) {
+		pai[paiB] = pai[paiA];
+	} else {
+		pai[paiA] = pai[paiB];
+		if (r[paiA] == r[paiB]) r[paiB]++;
+	} 
 }
 
 int main () {
@@ -30,7 +36,11 @@ int main () {
 
 	while (scanf("%d %d", &m, &n) && m) {
 		set<edge> S;
-		for (int i = 0; i < m; i++) pai[i] = i;
+		for (int i = 0; i < m; i++) {
+			pai[i] = i;
+			r[i] = 0;
+		}
+
 		int total = 0;
 		for (int i = 0; i < n; i++) {
 			int a, b, c; scanf("%d %d %d", &a, &b, &c);

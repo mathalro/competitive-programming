@@ -29,10 +29,10 @@ OK! It doesn't improve the solution, just get worst, because now we do 2*n opera
 
 So, now we have something like this
 
-0  0  0  0  0  0  0					Iniial state
-0  0  2 -2  0  0  0					ADD 2 2 2         ADD 2 to position 2 and subtract 2 from position 3
-0  5  2 -2 -5  0  0 				ADD 1 3 5					ADD 5 to position 1 and subtract 5 from position 4
-0  5  3 -2 -5  0 -1					ADD 2 6 1					ADD 1 to position 2 and subtract 1 from position 7
+0  0  0  0  0  0  0					Iniial state </br>
+0  0  2 -2  0  0  0					ADD 2 2 2         ADD 2 to position 2 and subtract 2 from position 3 </br>
+0  5  2 -2 -5  0  0 				ADD 1 3 5					ADD 5 to position 1 and subtract 5 from position 4 </br>
+0  5  3 -2 -5  0 -1					ADD 2 6 1					ADD 1 to position 2 and subtract 1 from position 7 </br>
 
 Now, if we have a query of type [a, b], that return the sum of elementes between a and b inclusive, we can do A = [0, a] i.e the sum of the prefix for a, and B = [0, b], and [a, b] = B-A. 
 

@@ -34,11 +34,8 @@ So, now we have something like this
 0  5  2 -2 -5  0  0 				ADD 1 3 5					ADD 5 to position 1 and subtract 5 from position 4 </br>
 0  5  3 -2 -5  0 -1					ADD 2 6 1					ADD 1 to position 2 and subtract 1 from position 7 </br>
 
-Now, if we have a query of type [a, b], that return the sum of elementes between a and b inclusive, we can do A = [0, a] i.e the sum of the prefix for a, and B = [0, b], and [a, b] = B-A. 
+Now, if we have a query of type [a, b], that return the sum of elements between a and b inclusive, we can do A = [0, a] i.e the sum of the prefix for a, and B = [0, b], and [a, b] = B-A. 
 
 But wait, if we do this for all the queries, the solution is not good. Yes, this solution is only good for a unique query, which is not our case. So, we have to improve the way that we make our queries, and for that, we will use Fenwick Trees, or Binary Indexed Trees (BIT).
 
-Using a BIT, we will get queries in O(log n), and updating in O(log n), and it is enough to the given time.
-
-
- 
+Using a BIT, we will get queries in O(log n), and updating in O(log n) and it is enough to the given time. The BIT will just replace our prefix array, because the idea is the same and the only change is the way that the intervals are calculed. 

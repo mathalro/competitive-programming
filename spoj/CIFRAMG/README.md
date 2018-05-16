@@ -8,16 +8,16 @@ We can reduce the given problem to a range sum query problem and it's possible t
 
 Suppose the following input:
 
-**ADD 2 2 2**
-**ADD 1 3 5**
-**ADD 2 6 1**
+**ADD 2 2 2** 
+**ADD 1 3 5** 
+**ADD 2 6 1** 
 
 The state of the array will be:
 
-0 0 0 0 0 0 0					Initial state
-0 0 2 0 0 0 0					ADD 2 2 2
-0 5 7 5 0 0 0					ADD 1 3 5
-0 5 8 6 1 1 0					ADD 2 6 1
+0 0 0 0 0 0 0					Initial state 
+0 0 2 0 0 0 0					ADD 2 2 2 
+0 5 7 5 0 0 0					ADD 1 3 5 
+0 5 8 6 1 1 0					ADD 2 6 1 
 
 ## Solution
 

@@ -4,10 +4,6 @@
 
 using namespace std;
 
-struct edge {
-	int v, p;
-};
-
 vector<int> qp, qr;
 int g[maxn][maxn], gr[maxn][maxn];
 int s, t, demanda;
@@ -25,39 +21,53 @@ int bfs() {
 	while (!q.empty()) {
 		int u = q.front(); q.pop();
 		if (u == t) break;
-		for (int i = 1; i < t; i++) {
-			if (!vis[i] && gr[u][i] > 0) {
+		for (int i = 1; i <= t; i++) {
+			if (i != u && !vis[i] && gr[u][i] > 0) {
 				vis[i] = 1;
 				pai[i] = u;
 				q.push(i);
 			}
 		}
 	}
-	
+
+	if (pai[t] == inf) return 0;
+
 	int gargalo = inf;
 
 	int tmp = t;
 
 	while (pai[tmp] != -1) {
-		tmp = pai[tmp];
 		gargalo = min(gargalo, gr[pai[tmp]][tmp]);
+		tmp = pai[tmp];
 	}
 
 	tmp = t;
-	while (pai[tmp] != -1) gr[pai[tmp]][tmp] -= gargalo;
+	while (pai[tmp] != -1) {
+		gr[pai[tmp]][tmp] -= gargalo;
+		gr[tmp][pai[tmp]] += gargalo;
+		tmp = pai[tmp];
+	}
 
 	return gargalo;
 }
 
 bool flow(int cost) {
-	for (int i = 0; i < p+r+1; i++)
-		for (int j = 0; j < p+r+1; j++)
-			gr[i][j] = g[i][j];
+	for (int i = 1; i <= r; i++) {
+		for (int j = r+1; j < t; j++) {
+			if (g[i][j] <= cost) {
+				gr[i][j] = inf;
+			} else {
+				gr[i][j] = 0;	
+			}
+		}
+	}
+
+	for (int i = 1; i <= r; i++) gr[0][i] = g[0][i];
+	for (int i = r+1; i < t; i++) gr[i][t] = g[i][t];
 
 	int cont = 0;
 	while (1) {
 		int gargalo = bfs();
-		if (gargalo > cost) return false;
 		if (!gargalo) return cont >= demanda;
 		cont += gargalo;
 	}
@@ -67,7 +77,7 @@ int main () {
 	
 	scanf("%d %d %d", &p, &r, &c);
 	int maior = -inf;
-	t = r+p;
+	t = r+p+1;
 
 	for (int i = 0; i < p; i++) {
 		int a; scanf("%d", &a);
@@ -86,11 +96,9 @@ int main () {
 		g[b][a+r] = c;
 	}
 
-	int ans = 0;
 	int l = 1, r = maior;
-
 	while (l < r) {
-		int mid = (l+r)<<1;
+		int mid = (l+r)>>1;
 		if (flow(mid)) {
 			r = mid;
 		} else {
@@ -98,7 +106,7 @@ int main () {
 		}
 	}
 
-	printf("%d", r);
+	printf("%d\n", r);
 
 	return 0;
 }

@@ -1,10 +1,9 @@
 #include <bits/stdc++.h>
-#define maxn 1001
+#define maxn 2050
 #define inf 0x3f3f3f3f
 
 using namespace std;
 
-vector<int> qp, qr;
 int g[maxn][maxn], gr[maxn][maxn];
 int s, t, demanda;
 int p, r, c;
@@ -52,9 +51,10 @@ int bfs() {
 }
 
 bool flow(int cost) {
+	memset(gr, 0, sizeof gr);
 	for (int i = 1; i <= r; i++) {
 		for (int j = r+1; j < t; j++) {
-			if (g[i][j] <= cost) {
+			if (g[i][j] && g[i][j] <= cost) {
 				gr[i][j] = inf;
 			} else {
 				gr[i][j] = 0;	
@@ -68,13 +68,14 @@ bool flow(int cost) {
 	int cont = 0;
 	while (1) {
 		int gargalo = bfs();
-		if (!gargalo) return cont >= demanda;
+		if (!gargalo) {
+			return cont >= demanda;
+		}
 		cont += gargalo;
 	}
 }
 
 int main () {
-	
 	scanf("%d %d %d", &p, &r, &c);
 	int maior = -inf;
 	t = r+p+1;
@@ -84,7 +85,6 @@ int main () {
 		g[i+r+1][t] = a;
 		demanda += a;
 	}
-
 	for (int i = 0; i < r; i++) {
 		int a; scanf("%d", &a);
 		g[0][i+1] = a;
@@ -96,7 +96,8 @@ int main () {
 		g[b][a+r] = c;
 	}
 
-	int l = 1, r = maior;
+	int l = 1, r = maior+1;
+	
 	while (l < r) {
 		int mid = (l+r)>>1;
 		if (flow(mid)) {
@@ -106,7 +107,7 @@ int main () {
 		}
 	}
 
-	printf("%d\n", r);
+	printf("%d\n", r > maior ? -1 : r);
 
 	return 0;
 }

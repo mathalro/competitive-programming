@@ -5,74 +5,86 @@
 using namespace std;
 
 int g[maxn][maxn], gr[maxn][maxn];
+vector<int> gg[maxn];
 int s, t, demanda;
 int p, r, c;
+int level[maxn];
 
-int bfs() {
-	int vis[t+1], pai[t+1];
-	memset(vis, 0, sizeof vis);
-	memset(pai, inf, sizeof pai);
-	queue<int> q;
-	q.push(s);
-	vis[s] = 1;
-	pai[s] = -1;
+bool bfs(int s, int t) {
+    memset(level, -1, sizeof level);
+    queue<int> q;
+    q.push(s); level[s] = 0;
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        for (int i = 0; i < gg[u].size(); i++) {
+			int v = gg[u][i];
+            if (level[v] < 0 && gr[u][v]) {
+                level[v] = level[u] + 1;
+                q.push(v);
+            }
+        }
+    }
+    return level[t] < 0 ? false : true;
+}
 
-	while (!q.empty()) {
-		int u = q.front(); q.pop();
-		if (u == t) break;
-		for (int i = 1; i <= t; i++) {
-			if (i != u && !vis[i] && gr[u][i] > 0) {
-				vis[i] = 1;
-				pai[i] = u;
-				q.push(i);
-			}
-		}
-	}
-
-	if (pai[t] == inf) return 0;
-
-	int gargalo = inf;
-
-	int tmp = t;
-
-	while (pai[tmp] != -1) {
-		gargalo = min(gargalo, gr[pai[tmp]][tmp]);
-		tmp = pai[tmp];
-	}
-
-	tmp = t;
-	while (pai[tmp] != -1) {
-		gr[pai[tmp]][tmp] -= gargalo;
-		gr[tmp][pai[tmp]] += gargalo;
-		tmp = pai[tmp];
-	}
-
-	return gargalo;
+int dfs(int u, int t, int flow) {
+    if (u == t) return flow;
+    for (int i = 0; i < gg[u].size(); i++) {
+		int v = gg[u][i];
+        if (level[v] == level[u]+1 && gr[u][v]) {
+            int f = min(flow, gr[u][v]);
+            int gargalo = dfs(v, t, f);
+            if (gargalo > 0) {
+                gr[u][v] -= gargalo;
+                gr[v][u] += gargalo;
+				gg[v].push_back(u);
+                return gargalo;
+            }
+        }
+    }
+    return 0;
 }
 
 bool flow(int cost) {
 	memset(gr, 0, sizeof gr);
+	for (int i = 0; i <= t; i++) gg[i].clear();
+
 	for (int i = 1; i <= r; i++) {
 		for (int j = r+1; j < t; j++) {
 			if (g[i][j] && g[i][j] <= cost) {
 				gr[i][j] = inf;
+				gg[i].push_back(j);
 			} else {
-				gr[i][j] = 0;	
+				gr[i][j] = 0;
 			}
 		}
 	}
 
-	for (int i = 1; i <= r; i++) gr[0][i] = g[0][i];
-	for (int i = r+1; i < t; i++) gr[i][t] = g[i][t];
-
-	int cont = 0;
-	while (1) {
-		int gargalo = bfs();
-		if (!gargalo) {
-			return cont >= demanda;
-		}
-		cont += gargalo;
+	for (int i = 1; i <= r; i++) {
+		gr[0][i] = g[0][i];
+		gg[0].push_back(i);
 	}
+	for (int i = r+1; i < t; i++) {
+		gr[i][t] = g[i][t];
+		gg[i].push_back(t);
+	}
+
+	/*for (int i = 0; i <= t; i++) {
+		printf("%d -> ", i);
+		for (int j = 0; j < gg[i].size(); j++) {
+			printf("[%d,%d] ", gg[i][j],gr[i][gg[i][j]]);
+		}puts("");
+	}puts("");*/
+
+    int flow = 0;
+	while (bfs(s, t)) {
+        while (int gargalo = dfs(s, t, inf)) {
+			flow += gargalo;
+		}
+    }
+
+    return flow >= demanda;
+
 }
 
 int main () {
@@ -111,13 +123,4 @@ int main () {
 
 	return 0;
 }
-
-
-
-
-
-
-
-
-
 
